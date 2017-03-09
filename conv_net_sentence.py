@@ -287,7 +287,7 @@ def make_idx_data_cv(revs, word_idx_map, cv, max_l=51, k=300, filter_h=5):
 if __name__=="__main__":
     print "loading data...",
     x = cPickle.load(open("mr.p","rb"))
-    revs, W, W2, word_idx_map, vocab = x[0], x[1], x[2], x[3], x[4]
+    revs, W, W2, word_idx_map, vocab, max_l = x[0], x[1], x[2], x[3], x[4], x[5]
     print "data loaded!"
     mode= sys.argv[1]
     word_vectors = sys.argv[2]    
@@ -307,7 +307,7 @@ if __name__=="__main__":
     results = []
     r = range(0,10)    
     for i in r:
-        datasets = make_idx_data_cv(revs, word_idx_map, i, max_l=56,k=300, filter_h=5)
+        datasets = make_idx_data_cv(revs, word_idx_map, i, max_l=max_l, k=300, filter_h=5)
         perf = train_conv_net(datasets,
                               U,
                               lr_decay=0.95,
